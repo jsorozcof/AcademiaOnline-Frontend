@@ -1,4 +1,4 @@
-<nz-table
+<nz-table *ngIf="dataLoaded"
   [nzData]="estudiantePrograma()"
   [nzLoading]="loading()"
   [nzBordered]="true"
@@ -11,20 +11,42 @@
       <th>Código</th>
       <th>Nombre</th>
       <th>Email</th>
-      <th>Programa Créditos</th>
+      <th>Programa</th>
+      <th>Créditos</th>
       <th>Acciones</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let e of estudiantePrograma()">
+    <tr *ngFor="let e of estudiantePrograma(); trackBy: trackById">
       <td>{{ e.id }}</td>
       <td>{{ e.codigo }}</td>
       <td>{{ e.nombre }}</td>
       <td>{{ e.email }}</td>
-      <td>{{ e.programa_creditos }}</td>
+      <td>{{ e.nombrePrograma }}</td>
+      <td>{{ e.programa_Creditos }}</td>
       <td>
-        <button nz-button nzType="link" nzDanger > <!--(click)="eliminar(e.id)"-->
-          Eliminar
+         <button nz-button nzType="link" nz-tooltip nzTooltipTitle="Editar estudiante" (click)="editar(e)">
+          <i nz-icon nzType="edit" nzTheme="twotone"></i>
+        </button>
+        <nz-popconfirm
+          nzTitle="¿Estás seguro que deseas eliminar este estudiante?"
+          nzOkText="Sí"
+          nzCancelText="No"
+          (nzOnConfirm)="eliminar(e.id)"
+        />
+         <button nz-button nzType="link" nzDanger nz-tooltip nzTooltipTitle="Eliminar estudiante" (click)="confirmarEliminar(e.id)">
+          <i nz-icon nzType="delete" nzTheme="twotone"></i>
+        </button>
+
+        <!-- Adherir a Programa -->
+          <button
+          nz-button
+          nzType="link"
+          nz-tooltip
+          nzTooltipTitle="Adherir estudiante a un programa"
+          (click)="abrirModalAdherir(e)"
+        >
+          <i nz-icon nzType="plus-circle" nzTheme="twotone"></i>
         </button>
       </td>
     </tr>

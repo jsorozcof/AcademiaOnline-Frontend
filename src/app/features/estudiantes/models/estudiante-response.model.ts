@@ -4,7 +4,7 @@ export interface EstudianteProgramaResponse {
   codigo: string;
   nombre: string;
   email: string;
-  programa_creditos: number;
+  programa_Creditos: number;
   programa_Id: number,
   nombrePrograma: string
 }

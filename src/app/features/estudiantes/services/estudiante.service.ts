@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { EstudianteRequest } from '../models/estudiante-request.model';
 import { EstudianteProgramaResponse, EstudianteResponse } from '../models/estudiante-response.model';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, of, throwError } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 
 @Injectable({
@@ -24,11 +24,14 @@ export class EstudianteService {
     );
   }
 
-  create(estudiante: EstudianteRequest): Observable<void> {
-    return this.http.post<void>(this.baseUrl, estudiante).pipe(
-      catchError(this.handleError)
-    );
-  }
+create(estudiante: EstudianteRequest): Observable<boolean> {
+  return this.http.post<boolean>(this.baseUrl, estudiante).pipe(
+    catchError((err) => {
+      console.error('Error al crear el estudiante', err);
+      return of(false);
+    })
+  );
+}
 
   update(id: number, estudiante: EstudianteRequest): Observable<void> {
     return this.http.put<void>(`${this.baseUrl}/${id}`, estudiante).pipe(
@@ -53,4 +56,6 @@ export class EstudianteService {
     const userMessage = error.error?.message || 'Error inesperado. Intenta nuevamente más tarde.';
     return throwError(() => new Error(userMessage));
   }
+
+
 }
