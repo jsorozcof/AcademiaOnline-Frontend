@@ -1,3 +1,15 @@
+
+export interface EstudianteProgramaResponse {
+  id: number;
+  codigo: string;
+  nombre: string;
+  email: string;
+  programa_creditos: number;
+  programa_Id: number,
+  nombrePrograma: string
+}
+
+
 export interface EstudianteResponse {
   id: number;
   codigo: string;

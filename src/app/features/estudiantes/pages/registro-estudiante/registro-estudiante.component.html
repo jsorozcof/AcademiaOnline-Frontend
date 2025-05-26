@@ -5,7 +5,7 @@
       <nz-form-control [nzSpan]="18">
         <input nz-input formControlName="nombre" />
       </nz-form-control>
-    </nz-form-item>onSubmit
+    </nz-form-item>
 
     <nz-form-item>
       <nz-form-label [nzSpan]="6">Email</nz-form-label>
@@ -18,8 +18,11 @@
       <nz-form-label [nzSpan]="6">Programa</nz-form-label>
       <nz-form-control [nzSpan]="18">
         <nz-select formControlName="programa" nzPlaceHolder="Seleccione un programa">
-          <nz-option nzValue="1" nzLabel="Ingeniería" />
-          <nz-option nzValue="2" nzLabel="Ciencias" />
+         <nz-option
+          *ngFor="let m of programas()"
+          [nzValue]="m.id"
+          [nzLabel]="m.nombre"
+         />
         </nz-select>
       </nz-form-control>
     </nz-form-item>
@@ -28,12 +31,16 @@
       <nz-form-label [nzSpan]="6">Materias</nz-form-label>
       <nz-form-control [nzSpan]="18">
         <nz-select
-          formControlName="materias"
+          formControlName="materiasSeleccionadas"
           nzMode="multiple"
           nzPlaceHolder="Seleccione 3 materias"
           [nzMaxTagCount]="3"
         >
-          <nz-option *ngFor="let m of [1,2,3,4,5,6,7,8,9,10]" [nzValue]="m" [nzLabel]="'Materia ' + m" />
+         <nz-option
+          *ngFor="let m of materias()"
+          [nzValue]="m.id"
+          [nzLabel]="m.nombre"
+         />
         </nz-select>
       </nz-form-control>
     </nz-form-item>

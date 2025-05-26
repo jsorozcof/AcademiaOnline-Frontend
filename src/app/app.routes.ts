@@ -8,6 +8,13 @@ export const routes: Routes = [
   {
     path: 'Alumnos', loadChildren: () => import('./features/estudiantes/estudiantes-routing.module').then(m => m.REGISTRO_ESTUDIANTE_ROUTES)
   },
+   {
+        path: 'lista',
+        loadComponent: () =>
+          import('./features/estudiantes/pages/lista-estudiantes/lista-estudiantes.component').then(
+            m => m.ListaEstudiantesComponent
+          ),
+      },
   {
     path: '',
     redirectTo: '/Alumnos',

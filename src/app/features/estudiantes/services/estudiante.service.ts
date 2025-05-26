@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { EstudianteRequest } from '../models/estudiante-request.model';
-import { EstudianteResponse } from '../models/estudiante-response.model';
+import { EstudianteProgramaResponse, EstudianteResponse } from '../models/estudiante-response.model';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 
@@ -12,8 +12,8 @@ export class EstudianteService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = `${environment.apiBaseUrl}/estudiantes`;
 
-  getAll(): Observable<EstudianteResponse[]> {
-    return this.http.get<EstudianteResponse[]>(this.baseUrl).pipe(
+  getAll(): Observable<EstudianteProgramaResponse[]> {
+    return this.http.get<EstudianteProgramaResponse[]>(this.baseUrl + '/ObtenerEstudiantes').pipe(
       catchError(this.handleError)
     );
   }
