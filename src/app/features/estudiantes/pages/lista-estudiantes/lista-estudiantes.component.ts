@@ -59,6 +59,8 @@ export class ListaEstudiantesComponent {
       complete: () => this.loading.set(false)
     });
   }
+
+
   editar(est: EstudianteProgramaResponse): void {
     console.log('Editar estudiante', est);
   }

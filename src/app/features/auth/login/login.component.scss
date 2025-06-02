@@ -1,0 +1,100 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+  padding: 20px;
+}
+
+/* Estilos para el header de login */
+.login-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 25vh;
+
+  .title-header {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    color: white;
+    padding: 10px 20px;
+  }
+
+  @media (max-width: 992px) {
+    margin-bottom: 20vh;
+
+    .title-header {
+      font-size: 22px;
+      padding: 8px 16px;
+    }
+  }
+
+
+  @media (max-width: 768px) {
+    margin-bottom: 15vh;
+
+    .title-header {
+      font-size: 20px;
+      padding: 6px 12px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 10vh;
+
+    .title-header {
+      font-size: 18px;
+      padding: 4px 10px;
+    }
+  }
+}
+
+
+.login-box {
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+  .title-box {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+/* Estilos para los controles del formulario */
+.form-control {
+  margin-bottom: 15px;
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+
+  input {
+    width: 100%;
+    height: 40px;
+    padding: 0 10px;
+    font-size: 16px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+  }
+
+  input:focus {
+    border-color: #40a9ff;
+    outline: none;
+  }
+}
+
+/* Estilos para el botón de login */
+.login-form-button {
+  width: 100%;
+  margin-top: 20px;
+}

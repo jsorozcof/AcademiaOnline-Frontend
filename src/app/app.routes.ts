@@ -1,8 +1,17 @@
 import { Routes } from '@angular/router';
 import { RegistroEstudianteComponent } from './features/estudiantes/pages/registro-estudiante/registro-estudiante.component';
+import { LoginComponent } from './features/auth/login/login.component';
 
 export const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/welcome' },
+  { path: 'auth/login', component: LoginComponent },
+  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
+
+
+  {
+    path: 'registro',
+    loadComponent: () => import('./features/auth/registro-estudiantes/registro-estudiantes.component').then(m => m.RegistroEstudiantesComponent)
+  },
+
   { path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.routes').then(m => m.WELCOME_ROUTES) },
 
   {

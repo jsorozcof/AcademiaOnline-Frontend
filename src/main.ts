@@ -6,12 +6,19 @@ import { NzIconModule, NzIconService } from 'ng-zorro-antd/icon';
 import { PlusCircleTwoTone, EditTwoTone, DeleteTwoTone } from '@ant-design/icons-angular/icons';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { appConfig } from './app/app.config';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './app/core/auth/auth.interceptor';
 
 bootstrapApplication(AppComponent, {
   ...appConfig,
   providers: [
     ...(appConfig.providers ?? []),
-    importProvidersFrom(NzIconModule, NzModalModule)
+    importProvidersFrom(NzIconModule, NzModalModule),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    }
   ]
 }).then(platformRef => {
   const injector = platformRef.injector;

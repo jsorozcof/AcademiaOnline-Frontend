@@ -1,0 +1,26 @@
+
+  <nz-header class="login-header">
+    <h2 class="title-header">PRUEBA TECNICA INGENEIRO MASTER - Faber Orozco</h2>
+  </nz-header>
+
+  <div class="login-box">
+    <h3 class="title-box">Inicio de Sesión</h3>
+    <form nz-form [formGroup]="validateForm" >
+      <div class="form-control">
+        <label for="username">Usuario</label>
+        <input nz-input id="username" formControlName="username" placeholder="Ingrese su usuario" />
+      </div>
+
+      <div class="form-control">
+        <label for="password">Contraseña</label>
+        <input nz-input id="password" type="password" formControlName="password" placeholder="Ingrese su contraseña" />
+      </div>
+
+      <button nz-button nzType="primary" class="login-form-button"  (click)="login()">Ingresar</button>
+    </form>
+    <div>
+      <a nz-button nzType="link"  routerLink="/registro"  nzBlock>Registrate</a>
+    </div>
+
+  </div>
+

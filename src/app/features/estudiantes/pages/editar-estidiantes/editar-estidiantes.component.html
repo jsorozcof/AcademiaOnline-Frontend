@@ -1,0 +1,41 @@
+<nz-modal
+  [(nzVisible)]="modalVisible"
+  nzTitle="Editar Estudiante"
+  [nzFooter]="null"
+  (nzOnCancel)="cerrarModal()"
+>
+  <form nz-form [formGroup]="formularioEstudiante" (ngSubmit)="guardarCambios()">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="nombre">Nombre</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <input nz-input formControlName="nombre" id="nombre"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="email">Email</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <input nz-input formControlName="email" id="email"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="programa">Programa</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <input nz-input formControlName="nombrePrograma" id="programa"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="creditos">Créditos</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <input nz-input formControlName="programa_Creditos" id="creditos"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <div style="text-align: right;">
+      <button nz-button nzType="primary" [disabled]="formularioEstudiante.invalid">Guardar</button>
+      <button nz-button nzType="default" (click)="cerrarModal()">Cancelar</button>
+    </div>
+  </form>
+</nz-modal>

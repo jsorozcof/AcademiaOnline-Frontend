@@ -1,4 +1,8 @@
-<nz-layout class="app-layout">
+<!-- Si es login o registro, no mostramos layout -->
+<router-outlet *ngIf="esPaginaSinLayout"></router-outlet>
+
+<!-- Si no es login o registro, mostramos layout completo -->
+<nz-layout *ngIf="!esPaginaSinLayout" class="app-layout">
   <nz-sider class="menu-sidebar"
     nzCollapsible
     nzWidth="256px"
@@ -27,26 +31,29 @@
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/lista" routerLinkActive="active">Estudiantes registrados</a>
           </li>
-          <!--
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/lista" routerLinkActive="active">Ver compañeros por materia.</a>
-          </li>
-          -->
         </ul>
       </li>
     </ul>
   </nz-sider>
+
   <nz-layout>
     <nz-header>
       <div class="app-header">
         <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-            <span class="trigger"
-               nz-icon
-               [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-            ></span>
+          <span class="trigger"
+            nz-icon
+            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'">
+          </span>
         </span>
+
+        <!-- Información del usuario -->
+        <div class="user-info">
+          <span>{{ usuario?.nombreCompleto }}</span> | <span>{{ usuario?.email }}</span>
+           <a nz-button nzType="link" nzDanger (click)="cerrarSesion()">Cerrar sesión</a>
+        </div>
       </div>
     </nz-header>
+
     <nz-content>
       <div class="inner-content">
         <router-outlet></router-outlet>
@@ -54,3 +61,4 @@
     </nz-content>
   </nz-layout>
 </nz-layout>
+

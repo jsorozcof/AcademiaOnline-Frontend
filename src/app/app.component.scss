@@ -78,3 +78,35 @@ nz-content {
   background: #fff;
   height: 100%;
 }
+.header-right {
+    display: flex;
+    align-items: center;
+
+    .user-email {
+      margin-right: 8px;
+      font-weight: 500;
+    }
+  }
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  color: black;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-info span {
+  font-size: 14px;
+}
+
+.user-info button {
+  font-size: 14px;
+}
+
