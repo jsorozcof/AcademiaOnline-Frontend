@@ -63,9 +63,8 @@ export class LoginComponent {
       this._authService.login(params).subscribe({
         next: (response) => {
           //this._authService.setUser(response);
-          console.error("response:", response);
           if(response.isSuccess){
-          this._router.navigate(['/welcome']);
+          this._router.navigate(['/adherirse-programa']);
 
           }else{
             this.message.error('El usuario no existe o las credenciales son incorrectas.');

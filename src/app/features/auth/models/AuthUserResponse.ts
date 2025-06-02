@@ -1,6 +1,7 @@
 export interface AuthUserResponse {
     nombreCompleto: string;
     userId:         string;
+    estudianteId:   number;
     userName:       string;
     email:          string;
     accessToken:    string;

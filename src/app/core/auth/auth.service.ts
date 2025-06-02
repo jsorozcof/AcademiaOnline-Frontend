@@ -21,7 +21,6 @@ login(req: AuthUserRequest): Observable<AuthUserResponse> {
 
   return this.http.post<AuthUserResponse>(requestUrl, req).pipe(
     tap(response => {
-          debugger;
       if (response.isSuccess) {
           localStorage.setItem('usuario', JSON.stringify(response));
           //localStorage.setItem(this.TOKEN_KEY, response.accessToken);

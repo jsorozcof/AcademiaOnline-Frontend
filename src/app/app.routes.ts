@@ -11,7 +11,10 @@ export const routes: Routes = [
     path: 'registro',
     loadComponent: () => import('./features/auth/registro-estudiantes/registro-estudiantes.component').then(m => m.RegistroEstudiantesComponent)
   },
-
+  {
+    path: 'adherirse-programa',
+    loadComponent: () => import('./features/estudiantes/pages/adherirse-programa/adherirse-programa.component').then(m => m.AdherirseProgramaComponent)
+  },
   { path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.routes').then(m => m.WELCOME_ROUTES) },
 
   {

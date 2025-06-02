@@ -16,23 +16,31 @@
       </a>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/welcome">Welcome</a>
-          </li>
-        </ul>
-      </li>
       <li nz-submenu nzOpen nzTitle="Academico" nzIcon="form">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/registro" routerLinkActive="active">Registro</a>
+            <a routerLink="/adherirse-programa">Adherirse a programa</a>
           </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/lista" routerLinkActive="active">Estudiantes registrados</a>
+          <li nz-menu-item>
+            <a routerLink="/adherirse-programa">Clases compartidas</a>
+          </li>
+           <li nz-menu-item>
+            <a routerLink="/adherirse-programa">Estidiantes registrados</a>
           </li>
         </ul>
       </li>
+     <!--
+      <li nz-submenu nzOpen nzTitle="Academico" nzIcon="form">
+        <ul>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/registro" >Registro</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/lista">Estudiantes registrados</a>
+          </li>
+        </ul>
+      </li>
+     -->
     </ul>
   </nz-sider>
 

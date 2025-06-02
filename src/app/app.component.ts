@@ -1,6 +1,6 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, Inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
@@ -10,7 +10,7 @@ import { filter } from 'rxjs';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, NzIconModule, NzLayoutModule, NzMenuModule, NzDropDownModule],
+  imports: [CommonModule, RouterOutlet, RouterLink,NzIconModule, NzLayoutModule, NzMenuModule, NzDropDownModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -29,7 +29,6 @@ export class AppComponent {
   }
 ngOnInit() {
   if (isPlatformBrowser(this.platformId)) {
-    debugger;
     this.usuario = JSON.parse(localStorage.getItem('usuario') || 'null');
 
     this.router.events.subscribe(() => {

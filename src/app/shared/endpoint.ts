@@ -5,7 +5,9 @@ export const endpoint = {
     LOGIN: "/Usuario/login",
     REGISTER: "/Usuario/register",
 
-
+    PROGRAMA_CREDITOS: "/ProgramaCredito",
+    ESTUDIANTE_ADHESION: "/Estudiantes/adhesion",
+    OBTENER_PROGRAMA_ESTUDIANTE: "/Estudiantes/ObtenerProgramaEstudiante"
 
   };
 

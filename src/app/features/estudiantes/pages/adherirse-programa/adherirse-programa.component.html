@@ -1,0 +1,52 @@
+<nz-card *ngIf="estudianteYaAdherido === false" nzTitle="Adherirse a un Programa de Créditos">
+  <form [formGroup]="form">
+    <div class="mb-4">
+      <label class="block mb-1 font-medium">Estudiante:</label>
+      <nz-input-group>
+        <input nz-input formControlName="estudiante" />
+      </nz-input-group>
+    </div>
+
+    <label class="block mb-2 font-medium">Selecciona un programa:</label>
+    <nz-table  *ngIf="!loading" [nzData]="programas" [nzBordered]="true" [nzSize]="'middle'" >
+      <thead>
+        <tr>
+          <th></th>
+          <th>Id</th>
+          <th>Nombre del Programa</th>
+          <th>Créditos</th>
+        </tr>
+      </thead>
+     <tbody>
+      <tr *ngFor="let programa of programas">
+        <td>
+          <label nz-radio>
+            <input type="radio" [value]="programa" formControlName="programaSeleccionado"/>
+          </label>
+        </td>
+        <td>{{ programa.id }}</td>
+        <td>{{ programa.nombre }}</td>
+        <td>{{ programa.creditos }}</td>
+      </tr>
+    </tbody>
+    </nz-table>
+
+    <div class="mt-4 text-right">
+      <button nz-button nzType="primary" [disabled]="!form.valid" (click)="adherirPrograma()">Guardar selección</button>
+    </div>
+  </form>
+</nz-card>
+
+<!-- Mensaje informativo si el estudiante ya está adherido -->
+<div *ngIf="estudianteYaAdherido" class="info-container">
+  <nz-alert nzType="info" nzMessage="Ya estás inscrito en el programa" [nzShowIcon]="true"></nz-alert>
+
+  <div class="program-info">
+    <p><strong>Programa Asignado:</strong> {{ programaAsignado }}</p>
+   <!-- <p><strong>Créditos:</strong> {{ programaAsignado?.creditos }}</p>-->
+
+    <button nz-button nzType="primary" (click)="inscribirMaterias()">
+      Inscribir Materias
+    </button>
+  </div>
+</div>
