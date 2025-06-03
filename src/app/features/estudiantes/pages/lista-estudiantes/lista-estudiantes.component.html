@@ -10,9 +10,6 @@
       <th>Id</th>
       <th>Código</th>
       <th>Nombre</th>
-      <th>Email</th>
-      <th>Programa</th>
-      <th>Créditos</th>
       <th>Acciones</th>
     </tr>
   </thead>
@@ -21,9 +18,6 @@
       <td>{{ e.id }}</td>
       <td>{{ e.codigo }}</td>
       <td>{{ e.nombre }}</td>
-      <td>{{ e.email }}</td>
-      <td>{{ e.nombrePrograma }}</td>
-      <td>{{ e.programa_Creditos }}</td>
       <td>
          <button nz-button nzType="link" nz-tooltip nzTooltipTitle="Editar estudiante" (click)="editar(e)">
   <i nz-icon nzType="edit" nzTheme="twotone"></i>
@@ -38,16 +32,6 @@
           <i nz-icon nzType="delete" nzTheme="twotone"></i>
         </button>
 
-        <!-- Adherir a Programa -->
-         <button
-        nz-button
-        nzType="link"
-        nz-tooltip
-        nzTooltipTitle="Adherir estudiante a un programa"
-        (click)="abrirModalAdherir(e)"
-      >
-        Adherir a Programa
-      </button>
       </td>
     </tr>
   </tbody>

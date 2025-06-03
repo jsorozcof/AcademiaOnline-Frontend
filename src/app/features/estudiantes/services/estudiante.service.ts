@@ -4,6 +4,7 @@ import { EstudianteRequest } from '../models/estudiante-request.model';
 import { EstudianteProgramaResponse, EstudianteResponse } from '../models/estudiante-response.model';
 import { Observable, catchError, of, throwError } from 'rxjs';
 import { environment } from '../../../../environments/environment';
+import { SeleccionMateriasRequest } from '../../materias/models/seleccion-materias-request';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,11 @@ create(estudiante: EstudianteRequest): Observable<boolean> {
       return of(false);
     })
   );
+}
+
+guardarMateriasSeleccionadas(request: SeleccionMateriasRequest): Observable<boolean> {
+  console.info("request", request);
+  return this.http.post<boolean>(`${environment.apiBaseUrl}/Estudiantes/SaveSelectedSubjects`, request);
 }
 
   update(id: number, estudiante: EstudianteRequest): Observable<void> {

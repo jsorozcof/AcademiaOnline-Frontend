@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { MateriaProfesor, MateriasResponse } from '../models/materia-response.model';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '../../../../environments/environment';
+import { SeleccionMateriasRequest } from '../models/seleccion-materias-request';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,7 @@ export class MateriasService {
       catchError(this.handleError)
     );
   }
+
 
   getById(id: number): Observable<MateriasResponse> {
     return this.http.get<MateriasResponse>(`${this.baseUrl}/${id}`).pipe(

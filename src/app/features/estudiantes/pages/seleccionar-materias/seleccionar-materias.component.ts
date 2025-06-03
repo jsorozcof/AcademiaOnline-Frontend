@@ -8,6 +8,9 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { CommonModule } from '@angular/common';
 import { MateriasService } from '../../../materias/services/materias.service';
 import { MateriaProfesor } from '../../../materias/models/materia-response.model';
+import { SeleccionMateriasRequest } from '../../../materias/models/seleccion-materias-request';
+import { EstudianteService } from '../../services/estudiante.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-seleccionar-materias',
@@ -17,19 +20,23 @@ import { MateriaProfesor } from '../../../materias/models/materia-response.model
   styleUrl: './seleccionar-materias.component.scss'
 })
 export class SeleccionarMateriasComponent implements OnInit {
-  @Input() estudiante!: { nombreCompleto: string; email: string };
-  form!: FormGroup;
+  @Input() estudiante!: { estudianteId: number, nombreCompleto: string; email: string };
+  formSelectMaterias!: FormGroup;
   materiasDisponibles: MateriaProfesor[] = [];
-  //materiasProfesor: MateriaProfesor[] = [];
   loading = true;
   errorMessage = '';
   materiasOpciones: { label: string; value: number }[] = [];
-  constructor(private fb: FormBuilder, private _materiasService: MateriasService) {}
+  constructor(
+    private fb: FormBuilder,
+    private _estudianteService: EstudianteService,
+    private _materiasService: MateriasService,
+    private message: NzMessageService
+  ) {}
 
   ngOnInit(): void {
     this.obtenerMateriasConProfesores();
 
-  this.form = this.fb.group({
+  this.formSelectMaterias = this.fb.group({
     materias: [[], [this.validarMaximoTresMaterias.bind(this), this.validarProfesoresUnicos.bind(this)]]
   });
   }
@@ -71,11 +78,43 @@ export class SeleccionarMateriasComponent implements OnInit {
       }
     });
   }
+guardarSeleccion(): void {
+  if (this.formSelectMaterias.invalid) return;
+
+  const materiaIds = this.formSelectMaterias.value.materias;
+
+  if (materiaIds.length > 3) {
+    this.message.error('Solo puedes seleccionar hasta 3 materias.');
+    return;
+  }
+
+  const request: SeleccionMateriasRequest = {
+    estudianteId: this.estudiante.estudianteId,
+    materiaIds: materiaIds,
+  };
+
+  this._estudianteService.guardarMateriasSeleccionadas(request).subscribe({
+    next: (response) => {
+      if (response) {
+        this.message.success('Materias seleccionadas guardadas correctamente.');
+      } else {
+        this.message.error('Ocurrió un error al guardar la selección.');
+      }
+    },
+    error: (err) => {
+      console.error('Error en la solicitud:', err);
+      this.message.error('Ocurrió un error al guardar la selección.');
+    }
+  });
+}
   onSubmit(): void {
-    if (this.form.invalid) return;
-    const seleccionadas = this.form.value.materias.map((id: number) =>
+    debugger;
+    if (this.formSelectMaterias.invalid) return;
+    const seleccionadas = this.formSelectMaterias.value.materias.map((id: number) =>
       this.materiasDisponibles.find(m => m.id === id)
     );
     console.log('Materias seleccionadas:', seleccionadas);
+    this.guardarSeleccion();
+
   }
 }

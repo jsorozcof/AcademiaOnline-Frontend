@@ -1,5 +1,5 @@
 <nz-card nzTitle="Selecciona hasta 3 materias (sin repetir profesor)">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="formSelectMaterias">
     <nz-form-item>
       <nz-form-control [nzErrorTip]="errorTemplate">
         <nz-select
@@ -15,6 +15,6 @@
       </nz-form-control>
     </nz-form-item>
 
-    <button nz-button nzType="primary" [disabled]="form.invalid">Guardar Selección</button>
+    <button nz-button nzType="primary" [disabled]="formSelectMaterias.invalid" (click)="guardarSeleccion()">Guardar Selección</button>
   </form>
 </nz-card>
