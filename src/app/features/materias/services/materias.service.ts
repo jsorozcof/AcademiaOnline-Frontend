@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { MateriasResponse } from '../models/materia-response.model';
+import { MateriaProfesor, MateriasResponse } from '../models/materia-response.model';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 
@@ -13,6 +13,12 @@ export class MateriasService {
 
   getAll(): Observable<MateriasResponse[]> {
     return this.http.get<MateriasResponse[]>(this.baseUrl).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getSubjectsWithProfessors(): Observable<MateriaProfesor[]> {
+    return this.http.get<MateriaProfesor[]>(`${environment.apiBaseUrl}/Materias/GetSubjectsWithProfessors`).pipe(
       catchError(this.handleError)
     );
   }

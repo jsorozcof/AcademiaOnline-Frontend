@@ -1,0 +1,20 @@
+<nz-card nzTitle="Selecciona hasta 3 materias (sin repetir profesor)">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <nz-form-item>
+      <nz-form-control [nzErrorTip]="errorTemplate">
+        <nz-select
+          formControlName="materias"
+          nzMode="multiple"
+          nzPlaceHolder="Seleccione materias"
+          [nzOptions]="materiasOpciones">
+        </nz-select>
+        <ng-template #errorTemplate let-control>
+          <ng-container *ngIf="control.hasError('maximoTres')">Máximo puedes seleccionar 3 materias.</ng-container>
+          <ng-container *ngIf="control.hasError('profesorRepetido')">No puedes seleccionar materias del mismo profesor.</ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+
+    <button nz-button nzType="primary" [disabled]="form.invalid">Guardar Selección</button>
+  </form>
+</nz-card>

@@ -11,10 +11,20 @@ import { AdherirEstudianteAProgramaRequest } from '../../../programas/models/pro
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { AdherirEstudianteProgramaResponse } from '../../models/adherir-estudiante-programa.model';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { SeleccionarMateriasComponent } from '../seleccionar-materias/seleccionar-materias.component';
 @Component({
   selector: 'app-adherirse-programa',
   standalone: true,
-  imports: [CommonModule,NzTableModule,NzInputModule,NzPaginationModule,NzCardModule,ReactiveFormsModule,NzAlertModule],
+  imports: [
+    CommonModule,
+    NzTableModule,
+    NzInputModule,
+    NzPaginationModule,
+    NzCardModule,
+    ReactiveFormsModule,
+    NzAlertModule,
+    SeleccionarMateriasComponent
+  ],
   templateUrl: './adherirse-programa.component.html',
   styleUrl: './adherirse-programa.component.scss'
 })
@@ -22,8 +32,10 @@ export class AdherirseProgramaComponent {
  form!: FormGroup;
  programas: ProgramasResponse[] = [];
  loading = true;
+ estudiante: any;
  programaAsignado!: string | null;
  estudianteYaAdherido = false;
+ mostrarMaterias = false;
 
  programaSeleccionado = signal<AdherirEstudianteAProgramaRequest | null>(null);
  respuestaSolicitud = signal<AdherirEstudianteProgramaResponse | null>(null);
@@ -39,17 +51,20 @@ export class AdherirseProgramaComponent {
   }
 
   ngOnInit(): void {
-    const estudiante = JSON.parse(localStorage.getItem('usuario') || '{}');
+    this.estudiante = JSON.parse(localStorage.getItem('usuario') || '{}');
 
     this.form = this.fb.group({
-      estudiante: [{ value: `${estudiante.nombreCompleto} (${estudiante.email})`, disabled: true }],
+      estudiante: [{ value: `${this.estudiante.nombreCompleto} (${this.estudiante.email})`, disabled: true }],
       programaSeleccionado: [null]
     });
 
      this.obtenerProgramas();
-     this.obtenerProgramaDelEstudiante(estudiante.estudianteId);
+     this.obtenerProgramaDelEstudiante(this.estudiante.estudianteId);
   }
 
+  inscribirMaterias() {
+    this.mostrarMaterias = true;
+  }
    obtenerProgramas(): void {
     this._programaService.getAll().subscribe({
       next: (data) => {
@@ -122,9 +137,7 @@ enviarSolicitud(adherirEstudiante: AdherirEstudianteAProgramaRequest) {
   });
 }
 
-inscribirMaterias(){
 
-}
 
   guardarSeleccion() {
     const seleccion = this.form.value.programaSeleccionado.id;

@@ -37,8 +37,10 @@
   </form>
 </nz-card>
 
+
 <!-- Mensaje informativo si el estudiante ya está adherido -->
-<div *ngIf="estudianteYaAdherido" class="info-container">
+<nz-card>
+  <div *ngIf="estudianteYaAdherido" class="info-container">
   <nz-alert nzType="info" nzMessage="Ya estás inscrito en el programa" [nzShowIcon]="true"></nz-alert>
 
   <div class="program-info">
@@ -50,3 +52,12 @@
     </button>
   </div>
 </div>
+</nz-card>
+
+
+  <!-- Mostrar SeleccionarMateriasComponent -->
+<app-seleccionar-materias
+  *ngIf="mostrarMaterias"
+  [estudiante]="estudiante"
+></app-seleccionar-materias>
+

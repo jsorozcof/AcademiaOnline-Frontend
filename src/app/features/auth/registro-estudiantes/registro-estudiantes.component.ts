@@ -46,35 +46,41 @@ export class RegistroEstudiantesComponent {
     });
   }
 
-    registrar(): void {
-    if (this.registroForm.valid) {
-      const params: AuthRegisterRequest = {
-        Nombre: this.registroForm.value.nombre!,
-        Correo: this.registroForm.value.correo!,
-        Password: this.registroForm.value.password!
-      };
+registrar(): void {
+  if (this.registroForm.valid) {
+    debugger;
+    const params: AuthRegisterRequest = {
+      Nombre: this.registroForm.value.nombre!,
+      Correo: this.registroForm.value.correo!,
+      Password: this.registroForm.value.password!
+    };
 
-      this._authService.register(params).subscribe({
-        next: (response) => {
-          //this._authService.setUser(response);
-          console.error("response:", response);
-          if(response){
-               this.message.success('Alumno registrado con exito');
-               this.registroForm.reset();
-          }else{
-            this.message.error('¡Ups! Algo no salió bien. Inténtalo de nuevo.');
-            this.registroForm.reset();
-          }
-        },
-        error: (err) => {
-          this.message.error('El usuario no existe o las credenciales son incorrectas.');
+    this._authService.register(params).subscribe({
+      next: (response) => {
+        if (response) {
+          this.message.success('Alumno registrado con éxito');
+          this.registroForm.reset();
+        } else {
+          this.message.error('Ocurrió un error desconocido');
           this.registroForm.reset();
         }
-      });
-    } else {
-      this.message.warning('Por favor, completa todos los campos.');
-    }
+      },
+      error: (err) => {
+        console.error('Error en registro:', err);
+
+        if (err.status === 400 && err.error?.errores?.length) {
+          this.message.error(`Error: ${err.error.errores.join(', ')}`);
+        } else {
+          this.message.error('¡Ups! Algo no salió bien. Inténtalo de nuevo.');
+        }
+
+        this.registroForm.reset();
+      }
+    });
+  } else {
+    this.message.warning('Por favor, completa todos los campos.');
   }
+}
 
     passwordsMatchValidator(group: AbstractControl): ValidationErrors | null {
     const password = group.get('password')?.value;
